@@ -1,0 +1,91 @@
+body{
+	font-family: sans-serif;
+}
+small, input{
+	display: block;
+}
+section{
+    float: left;
+    display: inline-block;
+    width: 50%;
+}
+.none{
+	display: none;
+}
+.full{
+	width: 100% !important;
+}
+.center{
+	margin: 0 auto;
+	max-width: 800px;
+}
+.text-center{
+	text-align: center;
+}
+
+/* botones */
+.btn{
+	background-color: transparent;
+	border-radius: 2px;
+	border: 1.8px solid #ccc;
+	text-decoration: none;
+	color: inherit;
+	padding: 0.3rem;
+	display: inline-block;
+}
+.btn:hover{
+	background-color: #ccc;
+}
+/* btn-danger */
+.btn-danger{
+	border-color: coral;
+	color: coral;
+}
+.btn-danger:hover{
+	border-color: coral;
+	background-color: coral;
+	color: #fff
+}
+/* btn-primary */
+.btn-primary{
+	border-color: #4d4ed8;
+	color: #4d4ed8;
+}
+.btn-primary:hover{
+	border-color: #4d4ed8;
+	background-color: #4d4ed8;
+	color: #fff
+}
+
+/* section crear */
+form{
+	max-width: 250px;
+}
+input, textarea{
+	padding: 0.3rem;
+	font-size: 14px;
+	margin-bottom: 5px;
+	border-radius: 2px;
+	border: 1.8px solid #ccc;
+}
+input[type='text'], input[type='email'], textarea{
+	width: 100%;
+}
+input[type='submit']{
+	cursor: pointer;
+}
+
+/* section listado */
+ul{
+	padding-right: 10px;
+}
+li:hover{
+	cursor: pointer;
+}
+ul p:hover{
+	color: #4d4ed8;
+}
+p{
+	margin: 8px 0 20px;
+	font-size: 16px;
+}
