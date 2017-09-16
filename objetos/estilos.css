@@ -7,8 +7,15 @@ small, input{
 section{
     float: left;
     display: inline-block;
-    width: 50%;
     margin-bottom: 60px;
+}
+#list{
+    width: calc(60% - 20px);
+    padding: 10px;
+}
+#create{
+    width: calc(40% - 20px);
+    padding: 10px;
 }
 .inline{
 	display: inline-block;
@@ -94,7 +101,10 @@ input, textarea{
 	border-radius: 2px;
 	border: 1.8px solid #ccc;
 }
-input[type='text'], input[type='email'], textarea{
+textarea{
+	min-height: 80px;
+}
+input[type='text'], input[type='email'], input[type='file'], textarea, progress{
 	width: 100%;
 }
 input[type='submit']{

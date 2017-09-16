@@ -79,7 +79,7 @@ function diario(init) {
 		.then(function (res) { return res.json(); })
 		.then(function (notice) { 
 			_noticias = _noticias.reverse().concat(notice);		// guardar noticias
-			cb(_noticias);											// callback
+			cb(_noticias);										// callback
 		})
 	}
 

@@ -42,6 +42,17 @@
 				placeholder='Noticia'
 				type='text'
 				required></textarea>
+			<input
+				id='img'
+				class='none'
+				type='text'
+				value='/objetos/fondo.svg'>
+			<!-- interacción -->
+			<input
+				id='img-upload'
+				type='file'>
+			<progress id='progress' value='0' max='100'></progress>
+			<img id='fondo' width='100%' src="/objetos/fondo.svg" alt='fondo'>
 			<input class='btn btn-primary' type='submit' value='Guardar'>
 		</form>
 
@@ -67,6 +78,16 @@
 				placeholder='Noticia'
 				type='text'
 				required></textarea>
+			<input
+				id='img-edit'
+				class='none'
+				type='text'>
+			<!-- interacción -->
+			<input
+				id='img-upload-edit'
+				type='file'>
+			<progress id='progress-edit' value='0' max='100'></progress>
+			<img id='fondo-edit' width='100%' src="/objetos/fondo.svg" alt='fondo'>
 			<input id='submit' class='btn btn-warning' type='submit' value='Guardar'>
 		</form>
 	</section>
@@ -80,6 +101,19 @@
 	</footer>
 
 	<!-- ejecución -->
+	<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+	<script>
+	  // init Firebase
+	  var config = {
+	    apiKey: "AIzaSyCERQNvNo6JTvDun8baKz9GqhuMX89t9U8",
+	    authDomain: "cdw-pigue.firebaseapp.com",
+	    databaseURL: "https://cdw-pigue.firebaseio.com",
+	    projectId: "cdw-pigue",
+	    storageBucket: "cdw-pigue.appspot.com",
+	    messagingSenderId: "384235636020"
+	  };
+	  firebase.initializeApp(config);
+	</script>
 	<script type='text/javascript'>
 		// crear nuevo objeto Diario			
 		var miDiario = diario([]);
@@ -90,6 +124,10 @@
 			// y refrescar lista
 			renderList(notices);	
 		});
+
+		document.getElementById('img-upload').addEventListener('change',upload,false);
+		document.getElementById('img-upload-edit').addEventListener('change',uploadEdit,false);
+
 	</script>
 </body>
 </html>

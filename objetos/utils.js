@@ -14,8 +14,9 @@ function renderList(notices) {
 // renderizar una noticia
 function renderOne(notice) {
 	var html = `<div class='center'>
+					<img width='100%' src='${notice.img}' alt='${notice.title}'>
 					<h2 class='text-center'>${notice.title}</h2>
-					<p class='text-center'>${notice.content}</p>
+					<p>${notice.content}</p>
 					<small ><b>Creado:</b> ${moment.unix(notice.date/1000).calendar()}</small>
 					<small ><b>Autor:</b> ${notice.email}</small>
 					<div class='actions'>
@@ -47,7 +48,8 @@ function nuevaNoticia(e) {
 		notice: {
 			title: document.getElementById('title').value,
 			email: document.getElementById('email').value,
-			content: document.getElementById('content').value
+			content: document.getElementById('content').value,
+			img: document.getElementById('img').value
 		}
 	};
 
@@ -56,6 +58,7 @@ function nuevaNoticia(e) {
 		// y refrescar lista
 		renderList( notices );
 		vaciarForm();
+		document.getElementById('img').value = '/objetos/fondo.svg';
 	});
 
 	return false;
@@ -104,7 +107,8 @@ function editarNoticiaSubmit(e) {
 		notice: {
 			title: document.getElementById('title-edit').value,
 			email: document.getElementById('email-edit').value,
-			content: document.getElementById('content-edit').value
+			content: document.getElementById('content-edit').value,
+			img: document.getElementById('img-edit').value 
 		}
 	};
 	// editar una noticia en la base de datos
@@ -118,6 +122,45 @@ function editarNoticiaSubmit(e) {
 	return false;
 }
 
+// Subir imagen
+function upload (event) {
+	const file = event.target.files[0];
+	const storageRef = firebase.storage().ref(`/fotos/${file.name}`);
+	const task = storageRef.put(file);
+
+	task.on('state_changed', snapshot => {
+		let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+		document.getElementById('progress').value = percentage;
+	}, error => {
+		console.log(error.message);
+	}, () => {
+		document.getElementById('fondo').src = task.snapshot.downloadURL;
+		document.getElementById('img').value = task.snapshot.downloadURL;
+		console.log(task.snapshot.downloadURL);
+	});
+
+	return false;
+}
+
+// editar imagen 
+function uploadEdit (event) {
+	const file = event.target.files[0];
+	const storageRef = firebase.storage().ref(`/fotos/${file.name}`);
+	const task = storageRef.put(file);
+
+	task.on('state_changed', snapshot => {
+		let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+		document.getElementById('progress-edit').value = percentage;
+	}, error => {
+		console.log(error.message);
+	}, () => {
+		document.getElementById('fondo-edit').src = task.snapshot.downloadURL;
+		document.getElementById('img-edit').value = task.snapshot.downloadURL;
+		console.log(task.snapshot.downloadURL);
+	});
+
+	return false;
+}
 
 
 // ayudas
@@ -153,6 +196,9 @@ function prepararVistaEdit(notice) {
 	document.getElementById('title-edit').value = notice.title;
 	document.getElementById('email-edit').value = notice.email;
 	document.getElementById('content-edit').value = notice.content;
+	document.getElementById('img-edit').value = notice.img;
+
+	document.getElementById('fondo-edit').src = notice.img || '/objetos/fondo.svg';
 
 	console.log('Édit!')
 }
