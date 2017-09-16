@@ -89,3 +89,13 @@ p{
 	margin: 8px 0 20px;
 	font-size: 16px;
 }
+
+/* footer */
+.logo-footer{
+	bottom: 10px;
+	right: 10px;
+	position: absolute;
+}
+.logo-footer img {
+	width: 30px;
+}

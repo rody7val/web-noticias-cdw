@@ -9,6 +9,8 @@
 	<script type='text/javascript' src='/objetos/moment.js'></script>
 	<script type='text/javascript' src='/objetos/moment-with-locales.min.js'></script>
 	<script type='text/javascript' src='/objetos/utils.js'></script>
+	<!-- app diario-->
+	<script type='text/javascript' src='/objetos/app.js'></script>
 </head>
 <body>
 	<h1>Curso de Diseño Web</h1>
@@ -44,11 +46,25 @@
 		</div>
 	</section>
 
+	<footer>
+		<div class='logo-footer'>
+			<a href="https://github.com/rody7val/web-noticias-cdw" target='_blank' rel="noopener noreferrer">
+				<img src="/objetos/github-logo.png" alt='github-logo'>
+			</a>
+		</div>
+	</footer>
+
 	<!-- ejecución -->
 	<script type='text/javascript'>
+		// crear nuevo objeto diario			
+		var miDiario = diario([]);
 		moment.locale('es');
-		var miDiario = diario([]);	// crear nuevo objeto diario
-		obtenerNoticias();			// refrescar listado
+
+		// obtener noticias de la base de datos
+		miDiario.setAll(function (notices) {
+			// y refrescar lista
+			renderList(notices);	
+		});
 	</script>
 </body>
 </html>
