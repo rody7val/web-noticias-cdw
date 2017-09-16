@@ -8,6 +8,10 @@ section{
     float: left;
     display: inline-block;
     width: 50%;
+    margin-bottom: 60px;
+}
+.inline{
+	display: inline-block;
 }
 .none{
 	display: none;
@@ -30,6 +34,8 @@ section{
 	border: 1.8px solid #ccc;
 	text-decoration: none;
 	color: inherit;
+	cursor: pointer;
+	font-size: larger;
 	padding: 0.3rem;
 	display: inline-block;
 }
@@ -38,22 +44,42 @@ section{
 }
 /* btn-danger */
 .btn-danger{
-	border-color: coral;
-	color: coral;
+	border-color: #d9534f;
+	color: #d9534f;
 }
 .btn-danger:hover{
-	border-color: coral;
-	background-color: coral;
+	border-color: #d9534f;
+	background-color: #d9534f;
 	color: #fff
 }
 /* btn-primary */
 .btn-primary{
-	border-color: #4d4ed8;
-	color: #4d4ed8;
+	border-color: #0275d8;
+	color: #0275d8;
 }
 .btn-primary:hover{
-	border-color: #4d4ed8;
-	background-color: #4d4ed8;
+	border-color: #0275d8;
+	background-color: #0275d8;
+	color: #fff
+}
+/* btn-warning */
+.btn-warning{
+	border-color: #f0ad4e;
+	color: #f0ad4e;
+}
+.btn-warning:hover{
+	border-color: #f0ad4e;
+	background-color: #f0ad4e;
+	color: #fff
+}
+/* btn-success */
+.btn-success{
+	border-color: #449d44;
+	color: #449d44;
+}
+.btn-success:hover{
+	border-color: #449d44;
+	background-color: #449d44;
 	color: #fff
 }
 
@@ -89,12 +115,15 @@ p{
 	margin: 8px 0 20px;
 	font-size: 16px;
 }
+.actions{
+	padding: 15px 0 10px 0;
+}
 
 /* footer */
 .logo-footer{
 	bottom: 10px;
 	right: 10px;
-	position: absolute;
+	position: fixed;
 }
 .logo-footer img {
 	width: 30px;

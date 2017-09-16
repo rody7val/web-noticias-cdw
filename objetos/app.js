@@ -1,7 +1,10 @@
-// app diario
+// app Diario
 function diario(init) {
+
+	// propiedades:
 	var _noticias = init;
 
+	// metodos:
 	function setAll(cb) {
 		var api;
 		fetch('https://cdwpigue.herokuapp.com/notices')
@@ -44,6 +47,26 @@ function diario(init) {
 		});
 	}
 
+	function edit(body, id, cb) {
+		fetch('https://cdwpigue.herokuapp.com/notices/' + id + '/edit', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify( body )
+		})
+		.then(function (res) { return res.json(); })
+		.then(function (notice) {
+			var index = _noticias.map(function (notice) {
+				return notice._id; 
+			}).indexOf(id);
+			
+			_noticias[index] = notice;		// remplazar noticia editada
+			cb(notice);						// callback
+		})
+	}
+
 	function add(body, cb) {
 		fetch('https://cdwpigue.herokuapp.com/notices', {
 			method: 'POST',
@@ -54,8 +77,8 @@ function diario(init) {
 			body: JSON.stringify( body )
 		})
 		.then(function (res) { return res.json(); })
-		.then(function (noticia) { 
-			_noticias = _noticias.reverse().concat(noticia);		// guardar noticias
+		.then(function (notice) { 
+			_noticias = _noticias.reverse().concat(notice);		// guardar noticias
 			cb(_noticias);											// callback
 		})
 	}
@@ -66,6 +89,7 @@ function diario(init) {
 		getAll: getAll,
 		getOne: getOne,
 		remove: remove,
+		edit: edit,
 		add: add
 	}
 }

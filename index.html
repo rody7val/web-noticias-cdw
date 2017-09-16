@@ -9,7 +9,7 @@
 	<script type='text/javascript' src='/objetos/moment.js'></script>
 	<script type='text/javascript' src='/objetos/moment-with-locales.min.js'></script>
 	<script type='text/javascript' src='/objetos/utils.js'></script>
-	<!-- app diario-->
+	<!-- app Diario-->
 	<script type='text/javascript' src='/objetos/app.js'></script>
 </head>
 <body>
@@ -23,27 +23,52 @@
 	</section>
 
 	<section id='create'>
-		<h2>Crear:</h2>
-		<div id='new'>
-			<form onsubmit='return nuevaNoticia(this)'>
-				<input
-					id='title'
-					placeholder='Titulo'
-					type='text'
-					required>
-				<input
-					id='email'
-					placeholder='Email'
-					type='email'
-					required>
-				<textarea
-					id='content'
-					placeholder='Noticia'
-					type='text'
-					required></textarea>
-				<input class='btn btn-primary' type='submit' value='Enviar!'>
-			</form>
-		</div>
+		<h2 id='title-create'>Crear:</h2>
+
+		<!-- formulario nueva noticia -->
+		<form id='form-new' onsubmit='return nuevaNoticia(this)'>
+			<input
+				id='title'
+				placeholder='Titulo'
+				type='text'
+				required>
+			<input
+				id='email'
+				placeholder='Email'
+				type='email'
+				required>
+			<textarea
+				id='content'
+				placeholder='Noticia'
+				type='text'
+				required></textarea>
+			<input class='btn btn-primary' type='submit' value='Guardar'>
+		</form>
+
+		<!-- formulario editar noticia -->
+		<form id='form-edit' class='none' onsubmit='return editarNoticiaSubmit(this)'>
+			<input
+				id='id-edit'
+				type='text'
+				value=''
+				class='none'>
+			<input
+				id='title-edit'
+				placeholder='Titulo'
+				type='text'
+				required>
+			<input
+				id='email-edit'
+				placeholder='Email'
+				type='email'
+				required>
+			<textarea
+				id='content-edit'
+				placeholder='Noticia'
+				type='text'
+				required></textarea>
+			<input id='submit' class='btn btn-warning' type='submit' value='Guardar'>
+		</form>
 	</section>
 
 	<footer>
@@ -56,7 +81,7 @@
 
 	<!-- ejecución -->
 	<script type='text/javascript'>
-		// crear nuevo objeto diario			
+		// crear nuevo objeto Diario			
 		var miDiario = diario([]);
 		moment.locale('es');
 
