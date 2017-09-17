@@ -4,19 +4,20 @@
 	<meta charset='utf-8'>
 	<title>CDW</title>
 	<!-- estilos -->
-	<link rel='stylesheet' type='text/css' href='/objetos/estilos.css'>
-	<!-- utilidades -->
-	<script type='text/javascript' src='/objetos/moment.js'></script>
-	<script type='text/javascript' src='/objetos/moment-with-locales.min.js'></script>
-	<script type='text/javascript' src='/objetos/utils.js'></script>
-	<!-- app Diario-->
-	<script type='text/javascript' src='/objetos/app.js'></script>
+	<link rel='stylesheet' type='text/css' href='/objetos/css/estilos.css'>
+	<!-- dependencias -->
+	<script type='text/javascript' src='/objetos/js/moment.js'></script>
+	<script type='text/javascript' src='/objetos/js/moment-with-locales.min.js'></script>
+	<script src='https://www.gstatic.com/firebasejs/4.3.1/firebase.js'></script>
+	<!-- app -->
+	<script type='text/javascript' src='/objetos/js/cliente.js'></script>
+	<script type='text/javascript' src='/objetos/js/servidor.js'></script>
 </head>
 <body>
 	<h1>Curso de Diseño Web</h1>
 
 	<section id='list'>
-		<h2 id='title-list'>Listado:</h2>
+		<h2 id='title-list'>Noticias:</h2>
 		<div id='all'>
 			<small>cargando...</small>
 		</div>
@@ -46,13 +47,13 @@
 				id='img'
 				class='none'
 				type='text'
-				value='/objetos/fondo.svg'>
-			<!-- interacción -->
+				value='/objetos/img/fondo.svg'>
+			<!-- interacciónes -->
 			<input
 				id='img-upload'
 				type='file'>
 			<progress id='progress' value='0' max='100'></progress>
-			<img id='fondo' width='100%' src="/objetos/fondo.svg" alt='fondo'>
+			<img id='fondo' width='100%' src='/objetos/img/fondo.svg' alt='fondo'>
 			<input class='btn btn-primary' type='submit' value='Guardar'>
 		</form>
 
@@ -82,52 +83,57 @@
 				id='img-edit'
 				class='none'
 				type='text'>
-			<!-- interacción -->
+			<!-- interacciónes -->
 			<input
 				id='img-upload-edit'
 				type='file'>
 			<progress id='progress-edit' value='0' max='100'></progress>
-			<img id='fondo-edit' width='100%' src="/objetos/fondo.svg" alt='fondo'>
+			<img id='fondo-edit' width='100%' src='/objetos/img/fondo.svg' alt='fondo'>
 			<input id='submit' class='btn btn-warning' type='submit' value='Guardar'>
 		</form>
 	</section>
 
 	<footer>
 		<div class='logo-footer'>
-			<a href="https://github.com/rody7val/web-noticias-cdw" target='_blank' rel="noopener noreferrer">
-				<img src="/objetos/github-logo.png" alt='github-logo'>
+			<a href='https://github.com/rody7val/web-noticias-cdw' target='_blank' rel='noopener noreferrer'>
+				<img src='/objetos/img/github-logo.png' alt='github-logo'>
 			</a>
 		</div>
 	</footer>
 
-	<!-- ejecución -->
-	<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
-	<script>
-	  // init Firebase
-	  var config = {
-	    apiKey: "AIzaSyCERQNvNo6JTvDun8baKz9GqhuMX89t9U8",
-	    authDomain: "cdw-pigue.firebaseapp.com",
-	    databaseURL: "https://cdw-pigue.firebaseio.com",
-	    projectId: "cdw-pigue",
-	    storageBucket: "cdw-pigue.appspot.com",
-	    messagingSenderId: "384235636020"
-	  };
-	  firebase.initializeApp(config);
-	</script>
+	<!-- utilidades -->
+	<script type='text/javascript' src='/objetos/js/event.js'></script>
+	<script type='text/javascript' src='/objetos/js/utils.js'></script>
+	<script type='text/javascript' src='/objetos/js/render.js'></script>
+
+	<!-- ejecuciónes -->
 	<script type='text/javascript'>
-		// crear nuevo objeto Diario			
-		var miDiario = diario([]);
+		// formato de fechas en español
 		moment.locale('es');
 
-		// obtener noticias de la base de datos
-		miDiario.setAll(function (notices) {
-			// y refrescar lista
-			renderList(notices);	
+		// inicializar google Firebase
+		firebase.initializeApp({
+			apiKey: 'TU_FIREBASE_APIKEY',
+			authDomain: 'TU_FIREBASE_AUTHDOMAIN',
+			databaseURL: 'TU_FIREBASE_DATABASEURL',
+			projectId: 'TU_FIREBASE_PROJECTID',
+			storageBucket: 'TU_FIREBASE_STORAGEBUCKET',
+			messagingSenderId: 'TU_FIREBASE_MESSAGINGsENDERID'
 		});
 
-		document.getElementById('img-upload').addEventListener('change',upload,false);
-		document.getElementById('img-upload-edit').addEventListener('change',uploadEdit,false);
+		// crear app cliente;
+		const diario = new Diario([]);
 
+		// crear app servidor;
+		const db = new DataBase('TU_API_PROTOCOL', 'TU_API_HOST');
+
+		// obtener noticias del servidor
+		db.obtener(noticias => {
+			// guardarlas en el lado cliente
+			diario.guardar(noticias);
+			// y renderizarlas
+			renderizar.listado(noticias);
+		});
 	</script>
 </body>
 </html>
