@@ -103,6 +103,10 @@
 
 			<!-- cargador de imagenes -->
 			<div id='upload' class='none'>
+				<span
+					title='Cerrar'
+					onclick='return cargadorDeImagenes(false)'
+					class='close fa fa-close'></span>
 				<input
 					id='img-upload'
 					type='file'>
@@ -112,11 +116,12 @@
 					type='text'
 					placeholder='link'
 					readonly>
-				<div style='position:relative'>
-					<img id='fondo' width='100%' src='' alt='Subir imagen'>
+				<div style='position:relative; min-height: 42px;'>
+					<div class='shadow'></div>
+					<img id='fondo' src='' alt='Ninguna imagen'>
 					<span
 						title='Copiar link'
-						onclick='copiarAlPortapapeles("img")'
+						onclick='return copiarAlPortapapeles("img")'
 						class='copy fa fa-copy'></span>
 				</div>
 			</div>

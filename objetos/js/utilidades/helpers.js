@@ -43,5 +43,6 @@ function prepararFormularioCrear() {
 }
 
 function cargadorDeImagenes(active) {
-	document.getElementById('upload').className = active ? '' : 'none';
+	visible = active;
+	document.getElementById('upload').className = visible ? '' : 'none';
 }

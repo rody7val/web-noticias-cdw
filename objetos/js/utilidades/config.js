@@ -36,8 +36,7 @@ let content = new SimpleMDE({
 		'image', {
 			name: "custom",
 			action: () => {
-				visible = !visible;
-				cargadorDeImagenes(visible)
+				cargadorDeImagenes(!visible)
 			},
 			className: "fa fa-upload",
 			title: "Subir imagenes",
