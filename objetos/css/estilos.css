@@ -220,7 +220,7 @@ input[type='submit']{
 #upload progress{
 	width: 100%;
 }
-#upload .copys{
+#upload .copy{
 	cursor: pointer;
 	border: 1.8px solid #00baf5;
     border-radius: 4px;

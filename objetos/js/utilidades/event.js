@@ -40,7 +40,6 @@ function verNoticia(id) {
 	// buscar una noticia en el cliente
 	diario.buscarUna(id, function (noticia) {
 		// y mostrarla
-		console.log(noticia);
 		renderizar.una(noticia);
 		prepararVista();
 	});
