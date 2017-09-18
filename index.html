@@ -2,130 +2,145 @@
 <html>
 <head>
 	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>CDW</title>
 	<!-- estilos -->
 	<link rel='stylesheet' type='text/css' href='/objetos/css/estilos.css'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 	<!-- dependencias -->
 	<script type='text/javascript' src='/objetos/js/moment.js'></script>
 	<script type='text/javascript' src='/objetos/js/moment-with-locales.min.js'></script>
-	<script src='https://www.gstatic.com/firebasejs/4.3.1/firebase.js'></script>
+	<script type='text/javascript' src="/objetos/js/simplemde.min.js"></script>
+	<script type='text/javascript' src='/objetos/js/firebase.js'></script>
+	<script type='text/javascript' src='/objetos/js/showdown.min.js'></script>
 	<!-- app -->
 	<script type='text/javascript' src='/objetos/js/cliente.js'></script>
 	<script type='text/javascript' src='/objetos/js/servidor.js'></script>
 </head>
 <body>
-	<h1>Curso de Diseño Web</h1>
 
-	<section id='list'>
-		<h2 id='title-list'>Noticias:</h2>
-		<div id='all'>
-			<small>cargando...</small>
-		</div>
-	</section>
+	<!-- cabecera -->
+	<header class='page-header'>
+		<h1 id='title-header'>Curso de Diseño Web</h1>
+	</header>
 
-	<section id='create'>
-		<h2 id='title-create'>Crear:</h2>
+	<!-- contenido -->
+	<div class='main-content'>
 
-		<!-- formulario nueva noticia -->
-		<form id='form-new' onsubmit='return nuevaNoticia(this)'>
-			<input
-				id='title'
-				placeholder='Titulo'
-				type='text'
-				required>
-			<input
-				id='email'
-				placeholder='Email'
-				type='email'
-				required>
-			<textarea
-				id='content'
-				placeholder='Noticia'
-				type='text'
-				required></textarea>
-			<input
-				id='img'
-				class='none'
-				type='text'
-				value='/objetos/img/fondo.svg'>
-			<!-- interacciónes -->
-			<input
-				id='img-upload'
-				type='file'>
-			<progress id='progress' value='0' max='100'></progress>
-			<img id='fondo' width='100%' src='/objetos/img/fondo.svg' alt='fondo'>
-			<input class='btn btn-primary' type='submit' value='Guardar'>
-		</form>
+		<!-- formularios -->
+		<section id='forms' class='none'>
+			<h2 id='title-create'>Crear</h2>
 
-		<!-- formulario editar noticia -->
-		<form id='form-edit' class='none' onsubmit='return editarNoticiaSubmit(this)'>
-			<input
-				id='id-edit'
-				type='text'
-				value=''
-				class='none'>
-			<input
-				id='title-edit'
-				placeholder='Titulo'
-				type='text'
-				required>
-			<input
-				id='email-edit'
-				placeholder='Email'
-				type='email'
-				required>
-			<textarea
-				id='content-edit'
-				placeholder='Noticia'
-				type='text'
-				required></textarea>
-			<input
-				id='img-edit'
-				class='none'
-				type='text'>
-			<!-- interacciónes -->
-			<input
-				id='img-upload-edit'
-				type='file'>
-			<progress id='progress-edit' value='0' max='100'></progress>
-			<img id='fondo-edit' width='100%' src='/objetos/img/fondo.svg' alt='fondo'>
-			<input id='submit' class='btn btn-warning' type='submit' value='Guardar'>
-		</form>
-	</section>
+			<!-- crear noticia -->
+			<form id='form-new' class='none' onsubmit='return nuevaNoticia(this)'>
+				<input
+					id='title'
+					placeholder='Titulo'
+					type='text'
+					required>
+				<input
+					id='email'
+					placeholder='Email'
+					type='email'
+					required>
+				<textarea
+					id='content'
+					placeholder='Noticia'
+					type='text'></textarea>
+				<input class='btn btn-success' type='submit' value='Guardar'>
+				<a class='back' onclick='return prepararLista()'>Volver</a>
+			</form>
 
-	<footer>
-		<div class='logo-footer'>
-			<a href='https://github.com/rody7val/web-noticias-cdw' target='_blank' rel='noopener noreferrer'>
+			<!-- editar noticia -->
+			<form id='form-edit' class='none' onsubmit='return editarNoticiaSubmit(this)'>
+				<input
+					id='id-edit'
+					type='text'
+					value=''
+					class='none'>
+				<input
+					id='title-edit'
+					placeholder='Titulo'
+					type='text'
+					required>
+				<input
+					id='email-edit'
+					placeholder='Email'
+					type='email'
+					required>
+				<textarea
+					id='content-edit'
+					placeholder='Noticia'
+					type='text'></textarea>
+				<input id='submit' class='btn btn-warning' type='submit' value='Guardar'>
+				<a class='back' onclick='return prepararLista()'>Volver</a>
+			</form>
+		</section>
+
+		<!-- listado -->
+		<section id='list'>
+			<h2 id='title-list'>Noticias</h2>
+			<div id='all'>
+				<small>cargando...</small>
+			</div>
+		</section>
+
+		<br>
+		<hr>
+
+		<!-- pie -->
+		<footer>
+			<h3 class='text-center'>
+				<small>Centro de formación profesional - Pigüé</small>
+			</h3>
+			<a
+				target='_blank'
+				class='text-center'
+				rel='noopener noreferrer'
+				href='https://github.com/rody7val/web-noticias-cdw'>
 				<img src='/objetos/img/github-logo.png' alt='github-logo'>
 			</a>
-		</div>
-	</footer>
+
+			<!-- cargador de imagenes -->
+			<div id='upload' class='none'>
+				<input
+					id='img-upload'
+					type='file'>
+				<progress id='progress' value='0' max='100'></progress>
+				<input
+					id='img'
+					type='text'
+					placeholder='link'
+					readonly>
+				<div style='position:relative'>
+					<img id='fondo' width='100%' src='' alt='Subir imagen'>
+					<span
+						title='Copiar link'
+						onclick='copiarAlPortapapeles("img")'
+						class='copy fa fa-copy'></span>
+				</div>
+			</div>
+
+			<!-- boton crear -->
+			<div class='create' onclick='return verFormularioCrear()'>
+				<img src="/objetos/img/mas.png">
+			</div>
+		</footer>
+	</div>
 
 	<!-- utilidades -->
+	<script type='text/javascript' src='/objetos/js/config.js'></script>
 	<script type='text/javascript' src='/objetos/js/event.js'></script>
 	<script type='text/javascript' src='/objetos/js/utils.js'></script>
 	<script type='text/javascript' src='/objetos/js/render.js'></script>
 
-	<!-- ejecuciónes -->
+	<!-- ejecución -->
 	<script type='text/javascript'>
-		// formato de fechas en español
-		moment.locale('es');
-
-		// inicializar google Firebase
-		firebase.initializeApp({
-			apiKey: 'TU_FIREBASE_APIKEY',
-			authDomain: 'TU_FIREBASE_AUTHDOMAIN',
-			databaseURL: 'TU_FIREBASE_DATABASEURL',
-			projectId: 'TU_FIREBASE_PROJECTID',
-			storageBucket: 'TU_FIREBASE_STORAGEBUCKET',
-			messagingSenderId: 'TU_FIREBASE_MESSAGINGsENDERID'
-		});
-
 		// crear app cliente;
 		const diario = new Diario([]);
 
 		// crear app servidor;
-		const db = new DataBase('TU_API_PROTOCOL', 'TU_API_HOST');
+		const db = new DataBase('https', 'cdwpigue.herokuapp.com');
 
 		// obtener noticias del servidor
 		db.obtener(noticias => {

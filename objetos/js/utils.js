@@ -5,27 +5,23 @@ function vaciarForm() {
 }
 
 function prepararLista() {
-	document.getElementById('form-edit').className = 'none';
-	document.getElementById('form-new').className = '';
-
-	document.getElementById('title-create').innerHTML = 'Crear';
-	document.getElementById('title-list').className = '';
-	document.getElementById('create').className = '';
 	document.getElementById('list').className = '';
+	document.getElementById('title-list').className = '';
+	document.getElementById('forms').className = 'none';
+	renderizar.listado( diario.obtenerTodas() );
+	cargadorDeImagenes(false);
 }
 
 function prepararVista() {
+	document.getElementById('list').className = '';
 	document.getElementById('title-list').className = 'none';
-	document.getElementById('create').className = 'none';
-	document.getElementById('list').className = 'full';
+	document.getElementById('forms').className = 'none';
 }
 
 function prepararVistaEdit(notice) {
 	document.getElementById('title-create').innerHTML = 'Editar';
-	document.getElementById('title-list').className = 'none';
-	document.getElementById('create').className = '';
-	document.getElementById('edit').className = 'none';
-	document.getElementById('list').className = '';
+	document.getElementById('forms').className = '';
+	document.getElementById('list').className = 'none';
 
 	document.getElementById('form-edit').className = '';
 	document.getElementById('form-new').className = 'none';
@@ -33,10 +29,19 @@ function prepararVistaEdit(notice) {
 	document.getElementById('id-edit').value = notice._id;
 	document.getElementById('title-edit').value = notice.title;
 	document.getElementById('email-edit').value = notice.email;
-	document.getElementById('content-edit').value = notice.content;
-	document.getElementById('img-edit').value = notice.img;
+	contentEdit.value(notice.content);
 
-	document.getElementById('fondo-edit').src = notice.img || '/objetos/fondo.svg';
+}
 
-	console.log('Édit!')
+function prepararFormularioCrear() {
+	document.getElementById('title-create').innerHTML = 'Crear';
+	document.getElementById('forms').className = '';
+	document.getElementById('form-new').className = '';
+	document.getElementById('form-edit').className = 'none';
+
+	document.getElementById('list').className = 'none';
+}
+
+function cargadorDeImagenes(active) {
+	document.getElementById('upload').className = active ? '' : 'none';
 }

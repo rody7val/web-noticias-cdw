@@ -1,6 +1,7 @@
 // App Servidor
 class DataBase {
 
+	// inicialización
 	constructor(protocol, host) {
 		this.url = protocol + '://' + host;
 	}

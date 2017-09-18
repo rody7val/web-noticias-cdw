@@ -1,32 +1,32 @@
 // App Dierio
 class Diario {
 
+	// inicialización
 	constructor(init) {
-		this.notices = init;
+		this.noticias = init;
 	}
 
 	// guardar noticias en el lado cliente
-	guardar(notices) {
-		this.notices = notices;
-	}
-
-	// reemplazar una noticia editada en el lado cliente
-	reemplazar(notice, id) {
-		const index = this.notices.map(notice => {
-			return notice._id; 
-		}).indexOf(id);
-
-		this.notices[index] = notice;
+	guardar(noticias) {
+		this.noticias = noticias;
 	}
 
 	// buscar una noticia en el lado cliente
 	buscarUna(id, cb) {
-		const index = this.notices.map(notice => {
+		let index = this.noticias.map(notice => {
 			return notice._id;
 		}).indexOf(id);
 
 		// callback
-		cb(this.notices[index]);
+		if (!cb) {
+			return this.noticias[index];
+		}
+		cb(this.noticias[index]);
+	}
+
+	// obtener noticias
+	obtenerTodas() {
+		return this.noticias;
 	}
 
 }
