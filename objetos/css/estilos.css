@@ -287,13 +287,21 @@ p{
 
 
 /* footer */
-footer > a{
+.social{
+	width: 70px;
+	height: 40px;
 	margin: 0 auto;
 	display: block;
+}
+.footer-link{
+	margin: 0 auto;
+	display: inline-block;
+	float: left;
 	margin-bottom: 8px;
+	margin-right: 5px;
 	width: 30px;
 }
-footer > a > img{
+.footer-link > img{
 	width: 30px;
 }
 footer h3 {

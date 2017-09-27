@@ -19,6 +19,7 @@ function prepararVista() {
 }
 
 function prepararVistaEdit(notice) {
+	document.getElementById('title-header').innerHTML = 'Editar Noticia';
 	document.getElementById('title-create').innerHTML = 'Editar';
 	document.getElementById('forms').className = '';
 	document.getElementById('list').className = 'none';
@@ -34,6 +35,7 @@ function prepararVistaEdit(notice) {
 }
 
 function prepararFormularioCrear() {
+	document.getElementById('title-header').innerHTML = 'Crear Noticia';
 	document.getElementById('title-create').innerHTML = 'Crear';
 	document.getElementById('forms').className = '';
 	document.getElementById('form-new').className = '';
