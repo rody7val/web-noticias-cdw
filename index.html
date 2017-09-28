@@ -9,8 +9,9 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 	<!-- dependencias -->
 	<script type='text/javascript' src='/objetos/js/dependencias/firebase.js'></script>
-	<script type='text/javascript' src='/objetos/js/dependencias/moment.js'></script>
 	<script type='text/javascript' src='/objetos/js/dependencias/moment-with-locales.min.js'></script>
+	<script type='text/javascript' src='/objetos/js/dependencias/moment.js'></script>
+	<script type='text/javascript' src='/objetos/js/dependencias/navigo.min.js'></script>
 	<script type='text/javascript' src='/objetos/js/dependencias/showdown.min.js'></script>
 	<script type='text/javascript' src="/objetos/js/dependencias/simplemde.min.js"></script>
 	<!-- app -->
@@ -24,75 +25,26 @@
 		<h1 id='title-header'>Curso de Diseño Web</h1>
 	</header>
 
-	<!-- contenido -->
+	<!-- contenedor -->
 	<div class='main-content'>
 
-		<!-- formularios -->
-		<section id='forms' class='none'>
-			<h2 id='title-create'>Crear</h2>
-
-			<!-- crear noticia -->
-			<form id='form-new' class='none' onsubmit='return nuevaNoticia(this)'>
-				<input
-					id='title'
-					placeholder='Titulo'
-					type='text'
-					required>
-				<input
-					id='email'
-					placeholder='Email'
-					type='email'
-					required>
-				<textarea
-					id='content'
-					placeholder='Noticia'
-					type='text'></textarea>
-				<input class='btn btn-success' type='submit' value='Guardar'>
-				<a class='back' onclick='return prepararLista()'>Volver</a>
-			</form>
-
-			<!-- editar noticia -->
-			<form id='form-edit' class='none' onsubmit='return editarNoticiaSubmit(this)'>
-				<input
-					id='id-edit'
-					type='text'
-					value=''
-					class='none'>
-				<input
-					id='title-edit'
-					placeholder='Titulo'
-					type='text'
-					required>
-				<input
-					id='email-edit'
-					placeholder='Email'
-					type='email'
-					required>
-				<textarea
-					id='content-edit'
-					placeholder='Noticia'
-					type='text'></textarea>
-				<input id='submit' class='btn btn-warning' type='submit' value='Guardar'>
-				<a class='back' onclick='return prepararLista()'>Volver</a>
-			</form>
-		</section>
-
-		<!-- listado -->
-		<section id='list'>
-			<h2 id='title-list'>Noticias</h2>
-			<div id='all'>
-				<small>cargando...</small>
-			</div>
-		</section>
+		<!-- contenido dinámico -->
+		<div id='app'>
+			<small>cargando...</small>
+		</div>
 
 		<br>
 		<hr>
-
+	
 		<!-- pie -->
 		<footer>
+
+			<!-- acerca de -->
 			<h3 class='text-center'>
 				<small>Centro de formación profesional - Pigüé</small>
 			</h3>
+
+			<!-- enlaces sociales -->
 			<div class='social'>
 				<a
 					target='_blank'
@@ -109,6 +61,7 @@
 					<img src='/objetos/img/facebook-logo.png' alt='facebook-logo'>
 				</a>
 			</div>
+
 			<!-- cargador de imagenes -->
 			<div id='upload' class='none'>
 				<span
@@ -129,14 +82,16 @@
 					<img id='fondo' src='' alt='Ninguna imagen'>
 					<span
 						title='Copiar link'
-						onclick='return copiarAlPortapapeles("img")'
+						onclick='return events.copiarAlPortapapeles("img")'
 						class='copy fa fa-copy'></span>
 				</div>
 			</div>
 
-			<!-- boton crear -->
-			<div class='create' onclick='return verFormularioCrear()'>
-				<img src="/objetos/img/mas.png">
+			<!-- boton crear noticia-->
+			<div class='create'>
+				<a href="/notice/new" data-navigo>
+					<img src="/objetos/img/mas.png">
+				</a>
 			</div>
 		</footer>
 	</div>
@@ -144,24 +99,33 @@
 	<!-- utilidades -->
 	<script type='text/javascript' src='/objetos/js/utilidades/config.js'></script>
 	<script type='text/javascript' src='/objetos/js/utilidades/event.js'></script>
-	<script type='text/javascript' src='/objetos/js/utilidades/helpers.js'></script>
 	<script type='text/javascript' src='/objetos/js/utilidades/render.js'></script>
 
 	<!-- ejecución -->
 	<script type='text/javascript'>
-		// crear app cliente;
-		const diario = new Diario([]);
+		// apps;
+		let diario = new Diario([]);
+		let db = new DataBase('https', 'cdwpigue.herokuapp.com');
+		let router = new Navigo(location.protocol + "//" + location.host, false);
 
-		// crear app servidor;
-		const db = new DataBase('https', 'cdwpigue.herokuapp.com');
+		// manejo de rutas
+		router.on({
+			'/': () => {
+				events.verNoticias();
+			},
+			'/notice/new': () => {
+				events.verFormularioCrear();
+			},
+			'/notice/:id': (params) => {
+				events.verNoticia(params.id);
+			},
+			'/notice/:id/edit': (params) => {
+				events.verFormularioEditar(params.id);
+			}
+		})
+		.notFound(events.notFound)
+		.resolve();
 
-		// obtener noticias del servidor
-		db.obtener(noticias => {
-			// guardarlas en el lado cliente
-			diario.guardar(noticias);
-			// y renderizarlas
-			renderizar.listado(noticias);
-		});
 	</script>
 </body>
 </html>

@@ -18,6 +18,18 @@ class DataBase {
 		});
 	}
 
+	// obtener noticias del serveidor
+	una(id, cb) {
+		fetch(this.url + '/notices/' + id)
+		.then(res => {
+			return res.json();
+		})
+		.then(noticias => {
+			// callback
+			cb(noticias);
+		});
+	}
+
 	// crear una noticia en el servidor
 	crear(body, cb) {
 		fetch(this.url + '/notices/', {

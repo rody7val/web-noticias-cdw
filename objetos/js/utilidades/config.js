@@ -20,62 +20,39 @@ firebase.initializeApp({
 	messagingSenderId: 'TU_FIREBASE_MESSAGINGsENDERID'
 });
 
-// contenido de la noticia en formulario crear
-let content = new SimpleMDE({ 
-	element: document.getElementById('content'),
-	toolbar: [
-		'bold',
-		'italic',
-		'heading',
-		'|',
-		'quote',
-		'unordered-list',
-		'ordered-list',
-		'|', 
-		'link',
-		'image', {
-			name: "custom",
-			action: () => {
-				cargadorDeImagenes(!visible)
+// inicializar editor md
+function mdInit(id) {
+	window.content = new SimpleMDE({ 
+		element: document.getElementById(id),
+		toolbar: [
+			'bold',
+			'italic',
+			'heading',
+			'|',
+			'quote',
+			'unordered-list',
+			'ordered-list',
+			'|', 
+			'link',
+			'image', {
+				name: "custom",
+				action: () => {
+					cargadorDeImagenes(!visible)
+				},
+				className: "fa fa-upload",
+				title: "Subir imagenes",
 			},
-			className: "fa fa-upload",
-			title: "Subir imagenes",
-		},
-		'|',
-		'preview',
-		'side-by-side',
-		'fullscreen',
-		'|',
-		'guide'
-	]
-});
+			'|',
+			'preview',
+			'side-by-side',
+			'fullscreen',
+			'|',
+			'guide'
+		]
+	});
+};
 
-// contenido de la noticia en formulario editar
-let contentEdit = new SimpleMDE({ element: document.getElementById('content-edit'),
-	toolbar: [
-		'bold',
-		'italic',
-		'heading',
-		'|',
-		'quote',
-		'unordered-list',
-		'ordered-list',
-		'|', 
-		'link',
-		'image', {
-			name: "custom",
-			action: () => {
-				visible = !visible;
-				cargadorDeImagenes(visible)
-			},
-			className: "fa fa-upload",
-			title: "Subir imagenes",
-		},
-		'|',
-		'preview',
-		'side-by-side',
-		'fullscreen',
-		'|',
-		'guide'
-	]
-});
+function cargadorDeImagenes(active) {
+	visible = active;
+	document.getElementById('upload').className = visible ? '' : 'none';
+}
