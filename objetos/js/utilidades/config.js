@@ -29,6 +29,7 @@ function mdInit(id) {
 			'italic',
 			'heading',
 			'|',
+			'code',
 			'quote',
 			'unordered-list',
 			'ordered-list',
@@ -48,7 +49,18 @@ function mdInit(id) {
 			'fullscreen',
 			'|',
 			'guide'
-		]
+		],
+		renderingConfig: {
+			singleLineBreaks: false,
+			codeSyntaxHighlighting: true,
+		},
+		previewRender: (plainText, preview) => { // Async method
+			setTimeout(function(){
+				preview.innerHTML = converter.makeHtml(plainText);
+				Prism.highlightAll();
+			}, 250);
+			return "Cargando...";
+		},
 	});
 };
 

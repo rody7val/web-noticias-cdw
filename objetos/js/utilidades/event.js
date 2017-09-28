@@ -24,6 +24,7 @@ var events = {
 		db.una(id, noticia => {
 			// y mostrarla
 			renderizar.una(noticia);
+			Prism.highlightAll();
 		});
 		return false;
 	},
