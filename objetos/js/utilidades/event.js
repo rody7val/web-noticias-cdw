@@ -8,6 +8,9 @@ var events = {
 			diario.guardar(noticias);
 			// y renderizarlas
 			renderizar.listado(noticias);
+			// ajustes:
+			Prism.highlightAll();
+			imgLoad(false);
 		});
 		return false;
 	},
@@ -15,6 +18,7 @@ var events = {
 	// link ver formulario crear
 	verFormularioCrear() {
 		renderizar.crear();
+		imgLoad(false);
 		return false;
 	},
 
@@ -24,7 +28,9 @@ var events = {
 		db.una(id, noticia => {
 			// y mostrarla
 			renderizar.una(noticia);
+			// ajustes:
 			Prism.highlightAll();
+			imgLoad(false);
 		});
 		return false;
 	},
@@ -32,6 +38,7 @@ var events = {
 	// submit crear noticia
 	crearNoticia(event) {
 		event.preventDefault();
+		imgLoad(true);
 
 		const body = {
 			notice: {
@@ -58,6 +65,7 @@ var events = {
 		db.una(id, noticia => {
 			// y mostrar la edición
 			renderizar.edit(noticia);
+			imgLoad(false);
 		});
 		return false;
 	},
@@ -65,6 +73,7 @@ var events = {
 	// submit editar noticia
 	editarNoticia(event) {
 		event.preventDefault();
+		imgLoad(true);
 
 		const id = event.target['id-edit'].value;
 		const body = {
@@ -88,6 +97,7 @@ var events = {
 
 	// submit borrar noticia
 	borrarNoticia(id) {
+		imgLoad(true);
 		// borrar una noticia en la base de datos
 		db.borrar(id, noticias => {
 			// guardarlas en el lado cliente
@@ -99,9 +109,10 @@ var events = {
 		return false;
 	},
 
-	// subir imagen
+	// submit subir imagen
 	upload(event) {
 		event.preventDefault();
+		imgLoad(true);
 
 		const file = event.target.files[0];
 		const storageRef = firebase.storage().ref(`/fotos/${file.name}`);
@@ -112,9 +123,11 @@ var events = {
 			document.getElementById('progress').value = percentage;
 		}, error => {
 			console.log(error.message);
+			imgLoad(false);
 		}, () => {
 			document.getElementById('fondo').src = task.snapshot.downloadURL;
 			document.getElementById('img').value = task.snapshot.downloadURL;
+			imgLoad(false);
 		});
 		return false;
 	},

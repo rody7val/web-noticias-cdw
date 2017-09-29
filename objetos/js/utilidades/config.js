@@ -68,3 +68,7 @@ function cargadorDeImagenes(active) {
 	visible = active;
 	document.getElementById('upload').className = visible ? '' : 'none';
 }
+
+function imgLoad(active) {
+	document.getElementById('load').className = active ? '' : 'none';
+}

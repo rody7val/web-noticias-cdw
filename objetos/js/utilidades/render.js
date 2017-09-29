@@ -41,7 +41,7 @@ const renderizar = {
 						id='remove'
 						type='submit'
 						class='btn btn-danger'
-						onclick='return confirm("Borrar noticia?")'
+						onclick='return confirm("Borrar noticia?");'
 						value='Borrar'>
 				</form>
 				<a class='edit-link btn btn-warning ' href='/notice/${notice._id}/edit' data-navigo>Editar</a>
