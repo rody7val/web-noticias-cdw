@@ -146,7 +146,9 @@ var events = {
 
 	// página no encontrada
 	notFound() {
+		imgLoad(true);
 		renderizar._404();
+		imgLoad(false);
 		return false;
 	}
 	

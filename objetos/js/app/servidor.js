@@ -27,6 +27,10 @@ class DataBase {
 		.then(noticias => {
 			// callback
 			cb(noticias);
+		})
+		.catch(err => {
+			console.log(err);
+			router.navigate('/notFound');
 		});
 	}
 

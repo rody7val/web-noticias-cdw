@@ -12,12 +12,12 @@ let visible = false;
 
 // inicializar google Firebase
 firebase.initializeApp({
-	apiKey: 'TU_FIREBASE_APIKEY',
-	authDomain: 'TU_FIREBASE_AUTHDOMAIN',
-	databaseURL: 'TU_FIREBASE_DATABASEURL',
-	projectId: 'TU_FIREBASE_PROJECTID',
-	storageBucket: 'TU_FIREBASE_STORAGEBUCKET',
-	messagingSenderId: 'TU_FIREBASE_MESSAGINGsENDERID'
+	apiKey: "AIzaSyCERQNvNo6JTvDun8baKz9GqhuMX89t9U8",
+	authDomain: "cdw-pigue.firebaseapp.com",
+	databaseURL: "https://cdw-pigue.firebaseio.com",
+	projectId: "cdw-pigue",
+	storageBucket: "cdw-pigue.appspot.com",
+	messagingSenderId: "384235636020"
 });
 
 // inicializar editor md

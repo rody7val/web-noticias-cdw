@@ -9,11 +9,11 @@
 	<link rel='stylesheet' type='text/css' href='/objetos/css/estilos.css'>
 	<link rel='stylesheet' type='text/css' href='/objetos/css/prism.css'>
 	<!-- dependencias -->
-	<script type='text/javascript' src='/objetos/js/dependencias/prism.js'></script>
 	<script type='text/javascript' src='/objetos/js/dependencias/firebase.js'></script>
 	<script type='text/javascript' src='/objetos/js/dependencias/moment-with-locales.min.js'></script>
 	<script type='text/javascript' src='/objetos/js/dependencias/moment.js'></script>
 	<script type='text/javascript' src='/objetos/js/dependencias/navigo.min.js'></script>
+	<script type='text/javascript' src='/objetos/js/dependencias/prism.js'></script>
 	<script type='text/javascript' src='/objetos/js/dependencias/showdown.min.js'></script>
 	<script type='text/javascript' src='/objetos/js/dependencias/simplemde.min.js'></script>
 	<!-- app -->
@@ -111,9 +111,9 @@
 	<!-- ejecución -->
 	<script type='text/javascript'>
 		// apps;
-		let diario = new Diario([]);
-		let db = new DataBase('https', 'cdwpigue.herokuapp.com');
-		let router = new Navigo(location.protocol + "//" + location.host, false);
+		const diario = new Diario([]);
+		const db = new DataBase('https', 'cdwpigue.herokuapp.com');
+		const router = new Navigo(location.protocol + "//" + location.host, false);
 
 		// manejo de rutas
 		router.on({
@@ -126,7 +126,6 @@
 				events.verFormularioCrear();
 			},
 			'/notice/:id': (params) => {
-				imgLoad(true);
 				events.verNoticia(params.id);
 			},
 			'/notice/:id/edit': (params) => {
